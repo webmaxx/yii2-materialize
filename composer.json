@@ -3,7 +3,7 @@
     "description": "The Materialize extension for the Yii framework",
     "keywords": ["yii2", "materialize"],
     "type": "yii2-extension",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "support": {
         "issues": "https://github.com/webmaxx/yii2-materialize/issues",
         "source": "https://github.com/webmaxx/yii2-materialze"

@@ -30,7 +30,7 @@ Usage
 ----
 
 For example, the following
-single line of code in a view file would render a Materialize Preloader plugin:
+single line of code in a view file would render a Materialize Progress plugin:
 
 ```php
 <?= webmaxx\materialize\Progress::widget(['percent' => 70]) ?>

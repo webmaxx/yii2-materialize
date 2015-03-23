@@ -9,6 +9,22 @@ use yii\helpers\Html;
  *
  * ```php
  * echo Collection::widget([
+ *     'options' => [
+ *         'class' => 'with-header',
+ *     ],
+ *     'items' => [
+ *         ['label' => Html::tag('h4', 'header'), 'type' => 'header'],
+ *         ['label' => 'test'],
+ *         ['label' => 'test2'],
+ *     ],
+ * ]);
+ * ```
+ * or
+ *
+ * ```php
+ * echo Collection::widget([
+ *     'tagName' => 'div',
+ *     'itemTagName' => 'a',
  *     'items' => [
  *         ['label' => 'test', 'options' => ['href' => '/']],
  *         ['label' => 'test2', 'options' => ['href' => '/', 'class' => 'active']],

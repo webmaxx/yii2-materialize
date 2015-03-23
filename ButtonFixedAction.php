@@ -38,10 +38,18 @@ class ButtonFixedAction extends Widget
      */
     public $encodeLabel = true;
     /**
+     * @var string default css class for button
+     */
+    public $defaultClass = 'btn';
+    /**
      * @var array the HTML attributes for the widget container tag.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $wrapOptions = [];
+    /**
+     * @var string default css class for button wrapper
+     */
+    public $defaultWrapClass = 'fixed-action-btn';
     /**
      * @var array list of buttons. Each array element represents a single button
      * which can be specified as a string or an array of the following structure:
@@ -63,8 +71,10 @@ class ButtonFixedAction extends Widget
     {
         parent::init();
         $this->clientOptions = false;
-        Html::addCssClass($this->wrapOptions, 'fixed-action-btn');
-        Html::addCssClass($this->options, 'btn');
+        if ($this->defaultWrapClass)
+            Html::addCssClass($this->wrapOptions, $this->defaultWrapClass);
+        if ($this->defaultClass)
+            Html::addCssClass($this->options, $this->defaultClass);
     }
 
     /**
@@ -90,7 +100,7 @@ class ButtonFixedAction extends Widget
         foreach ($this->buttons as $button) {
             if (is_array($button)) {
                 $button['view'] = $this->getView();
-                $button['addDefaultClass'] = false;
+                $button['defaultClass'] = false;
                 if (!isset($button['encodeLabel'])) {
                     $button['encodeLabel'] = $this->encodeLabels;
                 }

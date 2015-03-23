@@ -32,9 +32,9 @@ class Button extends Widget
      */
     public $encodeLabel = true;
     /**
-     * @var boolean whether the label should be HTML-encoded.
+     * @var string default css class for button
      */
-    public $addDefaultClass = true;
+    public $defaultClass = 'btn';
 
     /**
      * Initializes the widget.
@@ -44,8 +44,8 @@ class Button extends Widget
     {
         parent::init();
         $this->clientOptions = false;
-        if ($this->addDefaultClass)
-            Html::addCssClass($this->options, 'btn');
+        if ($this->defaultClass)
+            Html::addCssClass($this->options, $this->defaultClass);
     }
 
     /**

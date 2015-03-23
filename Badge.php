@@ -31,6 +31,10 @@ class Badge extends Widget
      * @var boolean whether the label should be HTML-encoded.
      */
     public $encodeLabel = true;
+    /**
+     * @var string default css class for badge
+     */
+    public $defaultClass = 'badge';
 
     /**
      * Initializes the widget.
@@ -40,7 +44,8 @@ class Badge extends Widget
     {
         parent::init();
         $this->clientOptions = false;
-        Html::addCssClass($this->options, 'badge');
+        if ($this->defaultClass)
+            Html::addCssClass($this->options, $this->defaultClass);
     }
 
     /**

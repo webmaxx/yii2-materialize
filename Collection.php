@@ -9,7 +9,11 @@ use yii\helpers\Html;
  *
  * ```php
  * echo Collection::widget([
- *     'options' => ['class' => 'btn-large'],
+ *     'items' => [
+ *         ['label' => 'test', 'options' => ['href' => '/']],
+ *         ['label' => 'test2', 'options' => ['href' => '/', 'class' => 'active']],
+ *         ['label' => 'test3', 'options' => ['href' => '/']],
+ *     ],
  * ]);
  * ```
  * @see http://materializecss.com/collections.html
@@ -80,10 +84,10 @@ class Collection extends Widget
                 if (!isset($item['encodeLabel'])) {
                     $item['encodeLabel'] = $this->encodeLabels;
                 }
-                if (!isset($item['defaultClass'])) {
+                if (!isset($item['type'])) {
                     Html::addCssClass($item['options'], 'collection-item');
                 } else {
-                    Html::addCssClass($item['options'], $item['defaultClass']);
+                    Html::addCssClass($item['options'], 'collection-' . $item['type']);
                 }
                 if (!isset($item['options'])) {
                     $item['options'] = [];

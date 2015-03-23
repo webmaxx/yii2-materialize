@@ -33,5 +33,5 @@ For example, the following
 single line of code in a view file would render a Materialize Preloader plugin:
 
 ```php
-<?= webmaxx\materialize\Preloader::widget(['percent' => 70]) ?>
+<?= webmaxx\materialize\Progress::widget(['percent' => 70]) ?>
 ```

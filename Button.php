@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /**
- * Button renders a bootstrap button.
+ * Button renders a materialize button.
  *
  * For example,
  *

@@ -9,7 +9,7 @@ use webmaxx\materialize\Button;
  * For example,
  *
  * ```php
- * echo Button::widget([
+ * echo ButtonFixedAction::widget([
  *     'label' => 'Action',
  *     'options' => ['class' => 'btn-large'],
  *     'wrapOptions' => ['style' => 'bottom: 45px; right: 24px;'],

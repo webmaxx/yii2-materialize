@@ -13,7 +13,7 @@ use yii\helpers\Html;
  *     'options' => ['class' => 'large'],
  * ]);
  * ```
- * @see http://materializecss.com/buttons.html
+ * @see http://materializecss.com/icons.html
  * @author webmaxx <webmaxx@webmaxx.name>
  * @since 2.0
  */

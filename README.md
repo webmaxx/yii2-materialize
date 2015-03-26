@@ -1,6 +1,8 @@
 Materialize Extension for Yii 2
 ===============================
 
+**NOTE. This extension in dev mode**
+
 This is the Materialize extension for Yii 2. It encapsulates [Materialize](http://materializecss.com/) components
 and plugins in terms of Yii widgets, and thus makes using Materialize components/plugins
 in Yii applications extremely easy.
@@ -21,7 +23,7 @@ php composer.phar require --prefer-dist webmaxx/yii2-materialize
 or add
 
 ```
-"webmaxx/yii2-materialize": "*"
+"webmaxx/yii2-materialize": "dev-master"
 ```
 
 to the require section of your `composer.json` file.

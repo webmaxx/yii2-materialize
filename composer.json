@@ -16,11 +16,17 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/materialize": "*"
+        "bower-asset/materialize": "dev-master"
     },
     "autoload": {
         "psr-4": {
             "webmaxx\\materialize\\": ""
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
         }
     }
 }

@@ -17,7 +17,7 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/materialize": "*"
+        "bower-asset/materialize": "@stable"
     },
     "autoload": {
         "psr-4": {

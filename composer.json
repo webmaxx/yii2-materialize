@@ -16,7 +16,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/materialize": "dev-master"
+        "bower-asset/materialize": "*"
     },
     "autoload": {
         "psr-4": {

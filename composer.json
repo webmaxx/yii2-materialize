@@ -16,7 +16,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": "2.0.*",
+        "yiisoft/yii2": "2.*",
         "bower-asset/materialize": "0.*"
     },
     "autoload": {
@@ -25,9 +25,6 @@
         }
     },
     "extra": {
-      "branch-alias": {
-        "dev-master": "master"
-      },
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"

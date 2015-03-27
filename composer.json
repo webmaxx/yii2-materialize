@@ -14,10 +14,10 @@
             "email": "webmaxx@webmaxx.name"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": "2.*",
-        "bower-asset/materialize": "0.*"
+        "yiisoft/yii2": "*",
+        "bower-asset/materialize": "*"
     },
     "autoload": {
         "psr-4": {

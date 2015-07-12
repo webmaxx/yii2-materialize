@@ -149,6 +149,7 @@ class Card extends Widget
     {
         if ($this->renderTitle) {
             $this->encodeContent = false;
+        }
         return Html::tag(
             'div',
             $this->encodeContent ? Html::encode($this->renderTitle() . $this->content) : $this->renderTitle() . $this->content,

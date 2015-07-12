@@ -147,14 +147,11 @@ class Card extends Widget
      */
     public function renderContent()
     {
-        $title = '';
-        if ($this->image === null) {
+        if ($this->renderTitle) {
             $this->encodeContent = false;
-            $title = $this->renderTitle();
-        }
         return Html::tag(
             'div',
-            $this->encodeContent ? Html::encode($title . $this->content) : $title . $this->content,
+            $this->encodeContent ? Html::encode($this->renderTitle() . $this->content) : $this->renderTitle() . $this->content,
             ['class' => 'card-content']
         );
     }

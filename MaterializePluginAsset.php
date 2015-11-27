@@ -12,10 +12,10 @@ class MaterializePluginAsset extends AssetBundle
 {
     public $sourcePath = '@bower/materialize/dist';
     public $js = [
-        'js/materialize.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'webmaxx\materialize\MaterializeAsset',
+        'webmaxx\materialize\MaterializeCssAsset',
+        'webmaxx\materialize\MaterializeJsAsset',
     ];
 }

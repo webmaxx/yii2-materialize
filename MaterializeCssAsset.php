@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
  * @author webmaxx <webmaxx@webmaxx.name>
  * @since 2.0
  */
-class MaterializeAsset extends AssetBundle
+class MaterializeCssAsset extends AssetBundle
 {
     public $sourcePath = '@bower/materialize/dist';
     public $css = [

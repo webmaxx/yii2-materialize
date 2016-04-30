@@ -1,14 +1,6 @@
 Materialize Extension for Yii 2
 ===============================
 
----
-
-> ### Note!
-> 
-> This extension in dev mode.
-
----
-
 This is the Materialize extension for Yii 2. It encapsulates [Materialize](http://materializecss.com/) components
 and plugins in terms of Yii widgets, and thus makes using Materialize components/plugins
 in Yii applications extremely easy.
@@ -23,13 +15,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist altiore/yii2-materialize
+php composer.phar require altiore/yii2-materialize
 ```
 
 or add
 
 ```
-"altiore/yii2-materialize": "dev-master"
+"altiore/yii2-materialize": "@stable"
 ```
 
 to the require section of your `composer.json` file.

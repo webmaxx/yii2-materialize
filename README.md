@@ -5,6 +5,8 @@ This is the Materialize extension for Yii 2. It encapsulates [Materialize](http:
 and plugins in terms of Yii widgets, and thus makes using Materialize components/plugins
 in Yii applications extremely easy.
 
+Initially this extension forked by repository [webmaxx/yii2-materialize](https://github.com/webmaxx/yii2-materialize)
+
 For license information check the [LICENSE](LICENSE.md)-file.
 
 Installation

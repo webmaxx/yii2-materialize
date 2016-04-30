@@ -28,6 +28,18 @@ or add
 
 to the require section of your `composer.json` file.
 
+Do not forget to add depending into your AssetBundle file. For example:
+
+```php
+<?php  
+class AppAsset extends AssetBundle  
+{  
+    public $depends = [  
+        \altiore\materialize\MaterializeAsset::class,  
+    ];  
+}
+```
+
 Usage
 ----
 

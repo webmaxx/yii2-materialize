@@ -1,4 +1,4 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use yii\helpers\Html;
 
@@ -14,7 +14,7 @@ use yii\helpers\Html;
  * ]);
  * ```
  * @see http://materializecss.com/buttons.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class Button extends Widget

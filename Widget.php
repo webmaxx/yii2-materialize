@@ -1,12 +1,12 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use Yii;
 use yii\helpers\Json;
 
 /**
- * \webmaxx\materialize\Widget is the base class for all materialize widgets.
+ * \altiore\materialize\Widget is the base class for all materialize widgets.
  *
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class Widget extends \yii\base\Widget
@@ -52,8 +52,6 @@ class Widget extends \yii\base\Widget
     protected function registerPlugin($name)
     {
         $view = $this->getView();
-
-        MaterializePluginAsset::register($view);
 
         $id = $this->options['id'];
 

@@ -1,4 +1,4 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -19,7 +19,7 @@ use yii\helpers\Url;
  * ]);
  * ```
  * @see http://materializecss.com/dropdown.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class Dropdown extends Widget
@@ -80,7 +80,6 @@ class Dropdown extends Widget
      */
     public function run()
     {
-        MaterializePluginAsset::register($this->getView());
         $this->registerClientEvents();
         $this->getView()->registerJs("
 $('#{$this->id}-btn').dropdown({

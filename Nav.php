@@ -1,4 +1,4 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -32,7 +32,7 @@ use yii\helpers\Html;
  * ]);
  * ```
  * @see http://materializecss.com/navbar.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class Nav extends Widget
@@ -122,9 +122,7 @@ class Nav extends Widget
      */
     public function run()
     {
-        MaterializeAsset::register($this->getView());
         if ($this->buttonCollapse) {
-            MaterializePluginAsset::register($this->getView());
             $this->getView()->registerJs('$("#' . $this->id . '-button-collapse").sideNav();');
         }
         return $this->renderItems();

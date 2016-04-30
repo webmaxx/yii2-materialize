@@ -1,4 +1,4 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -12,8 +12,8 @@ use yii\helpers\Html;
  * or [[\yii\widgets\Menu]] to build up such content. For example,
  *
  * ```php
- * use webmaxx\materialize\Nav;
- * use webmaxx\materialize\NavBar;
+ * use altiore\materialize\Nav;
+ * use altiore\materialize\NavBar;
  *
  * NavBar::begin(['brandLabel' => 'NavBar Test']);
  * echo Nav::widget([
@@ -25,7 +25,7 @@ use yii\helpers\Html;
  * NavBar::end();
  * ```
  * @see http://materializecss.com/navbar.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class NavBar extends Widget
@@ -106,6 +106,5 @@ class NavBar extends Widget
         if ($this->fixed) {
             echo Html::endTag('div');
         }
-        MaterializePluginAsset::register($this->getView());
     }
 }

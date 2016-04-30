@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
  * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
-class MaterializePluginAsset extends AssetBundle
+class MaterializeAsset extends AssetBundle
 {
     public $sourcePath = YII_ENV_DEV ? '@bower/materialize/dist' : null;
 

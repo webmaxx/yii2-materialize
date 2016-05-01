@@ -1,4 +1,4 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use yii\helpers\Html;
 
@@ -13,14 +13,14 @@ use yii\helpers\Html;
  *     'size' => 'large',
  * ]);
  * ```
- * 
+ *
  * or
- * 
+ *
  * ```php
  * echo Icon::show('grade', 'large');
  * ```
  * @see http://materializecss.com/icons.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class Icon extends Widget

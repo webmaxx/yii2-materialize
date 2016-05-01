@@ -1,7 +1,7 @@
-<?php namespace webmaxx\materialize;
+<?php namespace altiore\materialize;
 
 use yii\helpers\Html;
-use webmaxx\materialize\Button;
+use altiore\materialize\Button;
 
 /**
  * Button renders a materialize button.
@@ -20,7 +20,7 @@ use webmaxx\materialize\Button;
  * ]);
  * ```
  * @see http://materializecss.com/buttons.html
- * @author webmaxx <webmaxx@webmaxx.name>
+ * @author altiore <altiore@altiore.name>
  * @since 2.0
  */
 class ButtonFixedAction extends Widget

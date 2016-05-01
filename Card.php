@@ -6,7 +6,7 @@
  * Time: 12:37
  */
 
-namespace webmaxx\materialize;
+namespace altiore\materialize;
 
 use yii\helpers\Html;
 

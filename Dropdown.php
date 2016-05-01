@@ -1,150 +1,183 @@
-<?php namespace webmaxx\materialize;
+<?php
 
+namespace altiore\materialize;
+
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /**
- * Dropdown renders a Materialize dropdown menu component.
- *
- * For example,
- *
- * ```php
- * echo Dropdown::widget([
- *     'items' => [
- *         ['label' => 'DropdownA', 'url' => '/'],
- *         ['label' => 'DropdownB', 'url' => '#'],
- *     ],
- * ]);
- * ```
- * @see http://materializecss.com/dropdown.html
- * @author webmaxx <webmaxx@webmaxx.name>
- * @since 2.0
+ * Dropdown widget materialize
+ * @author  Razzwan <a href="mailto:">razvanlomov@gmail.com</a>
+ * @package altiore\materialize
  */
 class Dropdown extends Widget
 {
+    const PLUGIN_NAME = 'dropdown';
     /**
-     * @var string the tag to use to render the button
+     * Label fo dropdown list container
+     * @var
      */
-    public $buttontagName = 'a';
-    /**
-     * @var string the button label
-     */
-    public $buttonLabel = 'Dropdown';
-    /**
-     * @var boolean whether the label should be HTML-encoded.
-     */
-    public $buttonEncodeLabel = true;
-    /**
-     * @var array the HTML attributes of the button.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
-     */
-    public $buttonOptions = [];
+    public $label = 'Please configure label of widget!';
     /**
      * @var array list of menu items in the dropdown. Each array element can be either an HTML string,
      * or an array representing a single menu with the following structure:
-     *
      * - label: string, required, the label of the item link
      * - url: string|array, optional, the url of the item link. This will be processed by [[Url::to()]].
-     *   If not set, the item will be treated as a menu header when the item has no sub-menu.
-     * - visible: boolean, optional, whether this menu item is visible. Defaults to true.
-     * - linkOptions: array, optional, the HTML attributes of the item link.
-     * - options: array, optional, the HTML attributes of the item.
-     * - items: array, optional, the submenu items. The structure is the same as this property.
-     *
      * To insert divider use `<li class="divider"></li>`.
      */
     public $items = [];
     /**
-     * @var boolean whether the labels for header items should be HTML-encoded.
+     * If true - $this->toggleOptions add class btn
+     * @var bool
      */
-    public $encodeLabels = true;
+    public $isButton = false;
+    /**
+     * if true then default classes force will added
+     * false - It is understood that classes will rewrite
+     * @var bool
+     */
+    public $forceUseDefaultClasses = true;
+    /**
+     * default toggle html class
+     * @var string
+     */
+    protected $defaultOptions = [
+        'tag'              => 'a',
+        'class'            => 'dropdown-button',
+        'href'             => '#',
+        'data-beloworigin' => "true",
+    ];
+    /**
+     * Array of options of the toggle button
+     * @var array
+     *      example (default):
+     *          [
+     *              'tag'   => 'a',
+     *              'class' => 'dropdown-button',
+     *              'data-activates' => $this->getId(), // default activates element with id = $this->getId()
+     *              'href'  => '#'  // === 'url'  => '#'
+     *          ]
+     */
+    public $options = [];
+    /**
+     * default dropdown list container html class
+     * @var string
+     */
+    protected $defaultDropdownOptions = [
+        'class' => 'dropdown-content',
+    ];
+    /**
+     * Array of options of the dropdown list container
+     * @var array
+     * @see $this->toggleOptions
+     */
+    public $dropdownOptions = [];
+    /**
+     * Array of client options used in configure js plugin of this widget
+     * @var array
+     */
+    protected $defaultClientOptions = [
+        //'inDuration'      => 300,
+        //'outDuration'     => 225,
+        'constrain_width' => true,    // Does not change width of dropdown to that of the activator
+        'hover'           => false,   // Activate on hover
+        //'gutter'          => 0,     // Spacing from edge
+        //'belowOrigin'     => false, // Displays dropdown below the button
+        //'alignment'       => 'left' // Displays dropdown with edge aligned to the left of button
+    ];
 
     /**
-     * Initializes the widget.
-     * If you override this method, make sure you call the parent implementation first.
+     * @var string id html tag for dropdown list container
+     */
+    private $_dropdownId;
+
+    /**
+     * @return string id html tag for dropdown list container
+     */
+    public function getDropdownId()
+    {
+        if (empty($this->_dropdownId)) {
+            $this->_dropdownId = $this->getId() . '-dropdown';
+        }
+
+        return $this->_dropdownId;
+    }
+
+    /**
+     * Set id html tag for dropdown list container
+     * @param $value string
+     */
+    public function setDropdownId($value)
+    {
+        $this->_dropdownId = $value;
+    }
+
+    /**
+     * added default options to user settings
      */
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options, 'dropdown-content');
-        Html::addCssClass($this->buttonOptions, 'btn');
-        Html::addCssClass($this->buttonOptions, 'dropdown-button');
-        $this->buttonOptions['id'] = $this->id . '-btn';
-        $this->buttonOptions['data-activates'] = $this->id;
+        $this->addDefaultOptions($this->options, $this->defaultOptions, $this->forceUseDefaultClasses);
+        $this->addDefaultOptions($this->dropdownOptions, $this->defaultDropdownOptions, $this->forceUseDefaultClasses);
+        $this->addDefaultOptions($this->clientOptions, $this->defaultClientOptions);
+        $this->dropdownOptions['id'] = $this->options['data-activates'] = $this->getDropdownId();
+        if ($this->isButton) {
+            Html::addCssClass($this->options, 'btn');
+        }
     }
 
     /**
-     * Renders the widget.
+     * render widget
      */
     public function run()
     {
-        MaterializePluginAsset::register($this->getView());
-        $this->registerClientEvents();
-        $this->getView()->registerJs("
-$('#{$this->id}-btn').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: false, // Activate on click
-      alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
-      gutter: 0, // Spacing from edge
-      belowOrigin: false // Displays dropdown below the button
-});
-        ");
-        if ($this->buttonLabel !== null) {
-            return Html::tag($this->buttontagName, $this->buttonLabel, $this->buttonOptions) . $this->renderItems($this->items, $this->options);
-        } else {
-            return $this->renderItems($this->items, $this->options);
-        }
+        echo Html::tag(
+            ArrayHelper::remove($this->options, 'tag', 'a'),
+            $this->label,
+            $this->options
+        );
+        echo Html::beginTag(
+            'ul',
+            $this->dropdownOptions
+        );
+        $this->renderItems();
+        echo Html::endTag('ul');
+        $this->registerPlugin(static::PLUGIN_NAME);
     }
 
     /**
-     * Renders menu items.
-     * @param array $items the menu items to be rendered
-     * @param array $options the container HTML attributes
-     * @return string the rendering result.
-     * @throws InvalidConfigException if the label option is not specified in one of the items.
+     * Render items
+     * @throws InvalidConfigException
      */
-    protected function renderItems($items, $options = [])
+    protected function renderItems()
     {
-        $lines = [];
-        foreach ($items as $i => $item) {
-            if (isset($item['visible']) && !$item['visible']) {
-                continue;
-            }
+        foreach ($this->items as $item) {
             if (is_string($item)) {
-                $lines[] = $item;
-                continue;
-            }
-            if (!array_key_exists('label', $item)) {
-                throw new InvalidConfigException("The 'label' option is required.");
-            }
-            $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
-            $label = $encodeLabel ? Html::encode($item['label']) : $item['label'];
-            $itemOptions = ArrayHelper::getValue($item, 'options', []);
-            $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
-            $linkOptions['tabindex'] = '-1';
-            $url = array_key_exists('url', $item) ? $item['url'] : null;
-            if (empty($item['items'])) {
-                if ($url === null) {
-                    $content = $label;
-                    Html::addCssClass($itemOptions, 'dropdown-header');
-                } else {
-                    $content = Html::a($label, $url, $linkOptions);
+                echo $item;
+            } elseif (is_array($item)) {
+                if (!array_key_exists('label', $item)) {
+                    throw new InvalidConfigException("The 'label' option is required.");
                 }
-            } else {
-                $submenuOptions = $options;
-                unset($submenuOptions['id']);
-                $content = Html::a($label, $url === null ? '#' : $url, $linkOptions)
-                    . $this->renderItems($item['items'], $submenuOptions);
-                Html::addCssClass($itemOptions, 'dropdown-submenu');
+                if (array_key_exists('url', $item) && $item['url'] === Yii::$app->request->getUrl()) {
+                    if (!empty($item['options'])) {
+                        Html::addCssClass($item['itemOptions'], 'active');
+                    } else {
+                        $item['itemOptions'] = ['class' => 'active'];
+                    }
+                }
+                echo Html::tag(
+                    'li',
+                    Html::a(
+                        $item['label'],
+                        empty($item['url']) ? null : $item['url'],
+                        empty($item['linkOptions']) ? [] : $item['linkOptions']
+                    ),
+                    empty($item['itemOptions']) ? [] : $item['itemOptions']
+                );
             }
-
-            $lines[] = Html::tag('li', $content, $itemOptions);
         }
-
-        return Html::tag('ul', implode("\n", $lines), $options);
     }
 }

@@ -30,6 +30,8 @@ use yii\helpers\Html;
  */
 class NavBar extends Widget
 {
+    const DEFAULT_OPTIONS = 'blue-grey darken-2';
+    const DEFAULT_WRAPPER_CONTAINER_OPTIONS = 'nav-wrapper container';
     /**
      * @var array the HTML attributes for the widget container tag. The following special options are recognized:
      *
@@ -66,7 +68,7 @@ class NavBar extends Widget
      * @var array the HTML attributes of the wrapper container.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    public $wraperContainerOptions = [];
+    public $wrapperContainerOptions = [];
 
     /**
      * Initializes the widget.
@@ -75,6 +77,16 @@ class NavBar extends Widget
     {
         parent::init();
         $this->clientOptions = false;
+        if (empty($this->options['class'])) {
+            Html::addCssClass($this->options, self::DEFAULT_OPTIONS);
+        }
+        if (empty($this->options['role'])) {
+            $this->options['role'] = 'navigation';
+        }
+        if (empty($this->wrapperContainerOptions['class'])) {
+            Html::addCssClass($this->wrapperContainerOptions, self::DEFAULT_WRAPPER_CONTAINER_OPTIONS);
+        }
+        $this->clientOptions = false;
         if ($this->fixed) {
             if (!isset($this->fixedContainerOptions['class'])) {
                 Html::addCssClass($this->fixedContainerOptions, 'navbar-fixed');
@@ -82,16 +94,16 @@ class NavBar extends Widget
             echo Html::beginTag('div', $this->fixedContainerOptions);
         }
         Html::addCssClass($this->brandOptions, 'brand-logo');
-        $options = $this->options;
-        $tag = ArrayHelper::remove($options, 'tag', 'nav');
-        echo Html::beginTag($tag, $options);
-        if (!isset($this->wraperContainerOptions['class'])) {
-            Html::addCssClass($this->wraperContainerOptions, 'nav-wrapper');
-        }
-        echo Html::beginTag('div', $this->wraperContainerOptions);
+        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
+        echo Html::beginTag($tag, $this->options);
+        echo Html::beginTag('div', $this->wrapperContainerOptions);
         if ($this->brandLabel !== false) {
             Html::addCssClass($this->brandOptions, 'brand-logo');
-            echo Html::a($this->brandLabel, $this->brandUrl === false ? Yii::$app->homeUrl : $this->brandUrl, $this->brandOptions);
+            echo Html::a(
+                $this->brandLabel,
+                $this->brandUrl === false ? Yii::$app->homeUrl : $this->brandUrl,
+                $this->brandOptions
+            );
         }
     }
 
@@ -100,7 +112,6 @@ class NavBar extends Widget
      */
     public function run()
     {
-        //echo Html::endTag('div');
         $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
         echo Html::endTag($tag, $this->options);
         if ($this->fixed) {

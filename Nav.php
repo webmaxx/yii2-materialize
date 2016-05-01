@@ -37,6 +37,8 @@ use yii\helpers\Html;
  */
 class Nav extends Widget
 {
+    const DEFAULT_OPTIONS = 'right hide-on-med-and-down';
+    const MOBILE_TAG_ID = 'nav-mobile-';
     /**
      * @var array list of items in the nav widget. Each array element represents a single
      * menu item which can be either a string or an array with the following structure:
@@ -88,12 +90,20 @@ class Nav extends Widget
     /**
      * @var string the text of the button collapse. Note that this is not HTML-encoded.
      */
-    public $buttonCollapseLabel = '<i class="mdi-navigation-menu"></i>';
+    public $buttonCollapseLabel = '<i class="material-icons">menu</i>';
     /**
      * @var array the HTML attributes of the button collapse.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $buttonCollapseOptions = [];
+    /**
+     * @var string the HTML attribute id of mobile version menu
+     * @return string
+     */
+    public function getMobileId()
+    {
+        return self::MOBILE_TAG_ID . $this->id;
+    }
 
     /**
      * Initializes the widget.
@@ -102,10 +112,14 @@ class Nav extends Widget
     public function init()
     {
         parent::init();
+        if (empty($this->options['class'])) {
+            Html::addCssClass($this->options, self::DEFAULT_OPTIONS);
+        }
         if ($this->buttonCollapse) {
+            if (empty($this->buttonCollapseOptions['data-activates'])) {
+                $this->buttonCollapseOptions['data-activates'] = $this->getMobileId();
+            }
             Html::addCssClass($this->buttonCollapseOptions, 'button-collapse');
-            $this->buttonCollapseOptions['id'] = $this->id . '-button-collapse';
-            $this->buttonCollapseOptions['data-activates'] = $this->id;
             echo Html::a($this->buttonCollapseLabel, '#', $this->buttonCollapseOptions);
         }
         if ($this->route === null && Yii::$app->controller !== null) {
@@ -123,7 +137,7 @@ class Nav extends Widget
     public function run()
     {
         if ($this->buttonCollapse) {
-            $this->getView()->registerJs('$("#' . $this->id . '-button-collapse").sideNav();');
+            $this->getView()->registerJs("$('#{$this->getMobileId()}').sideNav();");
         }
         return $this->renderItems();
     }
@@ -142,6 +156,14 @@ class Nav extends Widget
         }
 
         return Html::tag('ul', implode("\n", $items), $this->options);
+    }
+
+    public function renderMobileItems()
+    {
+        $items = [];
+        foreach ($this->items as $i => $item) {
+
+        }
     }
 
     /**

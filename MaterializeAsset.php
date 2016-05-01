@@ -1,11 +1,13 @@
-<?php namespace altiore\materialize;
+<?php
+
+namespace altiore\materialize;
 
 use yii\web\AssetBundle;
 
 /**
- * Asset bundle for the Materialize javascript files.
+ * Asset bundle for the Materialize javascript and css files.
  *
- * @author altiore <altiore@altiore.name>
+ * @author Razzwan <a href="mailto:">razvanlomov@gmail.com</a>
  * @since 2.0
  */
 class MaterializeAsset extends AssetBundle
@@ -13,12 +15,14 @@ class MaterializeAsset extends AssetBundle
     public $sourcePath = YII_ENV_DEV ? '@bower/materialize/dist' : null;
 
     public $css = [
-        YII_ENV_DEV ? 'css/materialize.min.css' :
+        YII_ENV_DEV ? 'css/materialize.css' :
             '//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css',
+        ['//fonts.googleapis.com/css?family=Roboto:400,300,500', 'type' => 'text/css'],
+
     ];
 
     public $js = [
-        YII_ENV_DEV ? 'js/materialize.min.js' :
+        YII_ENV_DEV ? 'js/materialize.js' :
             '//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'
     ];
 
